@@ -41,20 +41,63 @@ const siteContent = {
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"]);
 
+let items = [];
+let jasonIds = [];
+let result= [];
+
+let containerChildren = document.querySelector('.container');
+
 let navTags = document.getElementsByTagName('nav')[0];
 
+var changeDivColor = document.querySelector('.main-content');
+
+
+// Loop over site content keys
+Object.keys(siteContent).forEach(function (el) {
+  // loop site content first object properties
+  Object.values(siteContent[el]).forEach(function (ele) {
+    // add all properties to jasonIds array
+    jasonIds.push(ele);
+  });
+
+  Object.keys(siteContent[el]).forEach(function (val) {
+    // add first properties to items array
+    items.push(val);
+  });
+});
+
+// IIFE function to check all child nodes with valid data 
+// and push them to an array result
+(function anyChild(value) {
+  value.childNodes.forEach(function (el) {
+    if (el.childNodes !== 0) {
+      anyChild(el);      
+    }
+
+    if (el.childNodes.length === 0 && el.nodeName !== '#text') {
+      result.push(el);
+    }
+  });
+})(containerChildren);
+
+// map over array result to set all of the attributes and innerText
+result.map((value, i) => {
+  if (items[i].includes('img')) {
+    value.setAttribute('src', jasonIds[i])
+  } 
+
+  value.innerText = jasonIds[i];
+});
+
+
+// Stretch goal
 let aTags = document.getElementsByTagName('a');
 
 for (let i = 0; i < aTags.length; i++) {
   aTags[i].style.color = "red";
-  // console.log(aTags[i])
 }
 
-aTags[0].textContent =  siteContent.nav['nav-item-1'];
-aTags[1].textContent =  siteContent.nav['nav-item-2'];
-aTags[2].textContent =  siteContent.nav['nav-item-3'];
-aTags[3].textContent =  siteContent.nav['nav-item-4'];
-aTags[4].textContent =  siteContent.nav['nav-item-5'];
-aTags[5].textContent =  siteContent.nav['nav-item-6'];
-
-
+changeDivColor.style.backgroundColor = '#e7dbdb';
+changeDivColor.style.border = '1px solid black';
+changeDivColor.style.padding = '2%'
+document.getElementById('middle-img').style.width = '100%';
