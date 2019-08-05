@@ -49,7 +49,7 @@ let containerChildren = document.querySelector('.container');
 
 let navTags = document.getElementsByTagName('nav')[0];
 
-var changeDivColor = document.querySelector('.main-content');
+let changeDivColor = document.querySelector('.main-content');
 
 
 // Loop over site content keys
