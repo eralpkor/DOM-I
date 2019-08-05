@@ -90,14 +90,22 @@ result.map((value, i) => {
 });
 
 
-// Stretch goal
+// Stretch goals
 let aTags = document.getElementsByTagName('a');
 
 for (let i = 0; i < aTags.length; i++) {
   aTags[i].style.color = "red";
+  // aTags[i].style.hover = 
 }
+
+[...document.getElementsByTagName('header')].forEach(function (el) {
+  el.style.background = '#6ee99f';
+  el.style.padding = '2%';
+});
+
 
 changeDivColor.style.backgroundColor = '#e7dbdb';
 changeDivColor.style.border = '1px solid black';
 changeDivColor.style.padding = '2%'
 document.getElementById('middle-img').style.width = '100%';
+
