@@ -103,9 +103,10 @@ for (let i = 0; i < aTags.length; i++) {
   el.style.padding = '2%';
 });
 
-
 changeDivColor.style.backgroundColor = '#e7dbdb';
 changeDivColor.style.border = '1px solid black';
 changeDivColor.style.padding = '2%'
 document.getElementById('middle-img').style.width = '100%';
+
+
 
