@@ -45,6 +45,9 @@ let items = [];
 let jasonIds = [];
 let result= [];
 
+let nodes = ['a','img','h1', 'button', 'p', 'h4'];
+let pars = [];
+
 let containerChildren = document.querySelector('.container');
 
 let navTags = document.getElementsByTagName('nav')[0];
@@ -52,7 +55,7 @@ let navTags = document.getElementsByTagName('nav')[0];
 let changeDivColor = document.querySelector('.main-content');
 
 
-// Loop over site content keys
+// Loop over site content keys values
 Object.keys(siteContent).forEach(function (el) {
   // loop site content first object properties
   Object.values(siteContent[el]).forEach(function (ele) {
@@ -66,18 +69,33 @@ Object.keys(siteContent).forEach(function (el) {
   });
 });
 
+// for (let i = 0; i < nodes.length; i++) {
+//   var nodeIterator = document.createNodeIterator(
+//     containerChildren,
+//     NodeFilter.SHOW_ELEMENT,
+//     function(node) {
+//         return node.nodeName.toLowerCase() === nodes[i] ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+
+//     }
+//   );
+  
+//   var currentNode;
+  
+//   while (currentNode = nodeIterator.nextNode()) {
+//   pars.push(currentNode);
+//   }
+// }
+
+
+
 // IIFE function to check all child nodes with valid data 
 // and push them to an array result
 (function anyChild(value) {
   value.childNodes.forEach(function (el) {
-    if (el.childNodes !== 0) {
-      anyChild(el);      
-    }
-
-    if (el.childNodes.length === 0 && el.nodeName !== '#text') {
-      result.push(el);
-    }
+    if (el.childNodes !== 0) anyChild(el);
+    if (el.childNodes.length === 0 && el.nodeName !== '#text') result.push(el);
   });
+
 })(containerChildren);
 
 // map over array result to set all of the attributes and innerText
@@ -95,9 +113,9 @@ let aTags = document.getElementsByTagName('a');
 
 for (let i = 0; i < aTags.length; i++) {
   aTags[i].style.color = "red";
-  // aTags[i].style.hover = 
 }
 
+// change color of navigation and add some padding too
 [...document.getElementsByTagName('header')].forEach(function (el) {
   el.style.background = '#6ee99f';
   el.style.padding = '2%';
